@@ -71,29 +71,6 @@ def naukri_login(username, password, chromedriver_path):
         print("An error occurred during login:", e)
         return None
 
-def print_sections(driver):
-    try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, "widgetHead")))
-        edit_section_elements = driver.find_elements(By.XPATH, "//div[@class='widgetHead']")
-
-        if not edit_section_elements:
-            print("No sections found.")
-            return
-
-        for element in edit_section_elements:
-            section_name = element.text.strip()
-            print("Section:", section_name)
-
-            section_content = element.find_element(By.XPATH, "./following-sibling::div[1]").text.strip()
-            print("Content:", section_content)
-    except Exception as e:
-        print("An error occurred while printing sections:", e)
-
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException
-
 def update_profile(driver, new_information):
     try:
         # Navigate to the profile edit page
@@ -138,9 +115,9 @@ def update_profile(driver, new_information):
 
 # Example usage
 if __name__ == "__main__":
-    username = "nandan10154@gmail.com"
-    password = "7090811763"
-    chromedriver_path = r"C:\Users\nanda\Downloads\chromedriver-win64\chromedriver-win64\chromedriver.exe"
+    username = ""
+    password = ""
+    chromedriver_path = r"path\to\chromedriver.exe"
     driver = naukri_login(username, password, chromedriver_path)
     update_profile(driver, {"resume_headline": "New resume headline"})
     driver.quit()
